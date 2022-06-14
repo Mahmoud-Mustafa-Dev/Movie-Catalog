@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height">55dp</dimen>
+
+
+    <dimen name="margin_0_5x">8dp</dimen>
+    <dimen name="content_vertical_margin">60dp</dimen>
+
+    <dimen name="base_elevation">5dp</dimen>
+    <dimen name="level_1_elevation">10dp</dimen>
+    <dimen name="level_2_elevation">20dp</dimen>
+
+    <dimen name="text_size_title">30sp</dimen>
+    <dimen name="text_size_header">25sp</dimen>
+    <dimen name="text_size_medium">15sp</dimen>
+
+    <dimen name="image_size_medium">150dp</dimen>
+</resources>
