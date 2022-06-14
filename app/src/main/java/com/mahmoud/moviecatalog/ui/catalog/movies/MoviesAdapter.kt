@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.common.entities.Movie
 import com.mahmoud.moviecatalog.R
 import com.mahmoud.moviecatalog.databinding.MovieCardBinding
-import com.mahmoud.moviecatalog.ui.catalog.MovieCardListener
+import com.mahmoud.common.listeners.MovieCardListener
 
 class MoviesAdapter(
     private val listener: MovieCardListener,

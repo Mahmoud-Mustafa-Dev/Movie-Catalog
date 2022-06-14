@@ -1,6 +1,7 @@
 package com.mahmoud.moviecatalog
 
 import com.mahmoud.moviecatalog.ui.catalog.MoviesCatalogViewModel
+import com.mahmoud.use_case.UseCaseModuleProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -9,10 +10,10 @@ import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.dsl.module
 
-object ApplicationModuleProvider{
+object ApplicationModuleProvider {
     fun getModules(): List<Module> {
-        //todo return all the desired modules
-        return listOf(viewModelModule)
+        val useCaseModule = UseCaseModuleProvider.getModules()
+        return listOf(viewModelModule).plus(useCaseModule)
     }
 }
 
@@ -23,7 +24,6 @@ private fun Scope.ioDispatcher(): CoroutineDispatcher {
 }
 
 private val viewModelModule = module {
-
-    single (named(IO_DISPATCHER_QUALIFIER)) { Dispatchers.IO}
-    viewModel { MoviesCatalogViewModel() }
+    single(named(IO_DISPATCHER_QUALIFIER)) { Dispatchers.IO }
+    viewModel { MoviesCatalogViewModel(get(), ioDispatcher()) }
 }

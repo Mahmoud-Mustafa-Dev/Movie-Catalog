@@ -1,4 +1,4 @@
-package com.mahmoud.moviecatalog.ui.catalog
+package com.mahmoud.common.listeners
 
 interface MovieCardListener {
     fun onMovieClicked()
