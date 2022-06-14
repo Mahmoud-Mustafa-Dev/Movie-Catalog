@@ -1,7 +1,9 @@
 package com.mahmoud.moviecatalog
 
+import com.mahmoud.moviecatalog.ui.catalog.MoviesCatalogViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
@@ -23,5 +25,5 @@ private fun Scope.ioDispatcher(): CoroutineDispatcher {
 private val viewModelModule = module {
 
     single (named(IO_DISPATCHER_QUALIFIER)) { Dispatchers.IO}
-    //todo add view models here
+    viewModel { MoviesCatalogViewModel() }
 }

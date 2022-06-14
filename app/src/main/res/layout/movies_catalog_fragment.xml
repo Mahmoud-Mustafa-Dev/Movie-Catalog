@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
+    tools:context=".ui.catalog.MoviesCatalogFragment">
+
+    <include
+        android:id="@+id/bar"
+        layout="@layout/app_bar" />
+
+    <TextView
+        android:id="@+id/tv_popular_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:fontFamily="sans-serif"
+        android:gravity="start"
+        android:text="@string/popular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_header"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_popular"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_size_medium"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_popular_header" />
+
+    <TextView
+        android:id="@+id/tv_top_rated_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:fontFamily="sans-serif"
+        android:gravity="start"
+        android:text="@string/top_rated"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_header"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_popular" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_top_rated"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_size_medium"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_top_rated_header" />
+
+    <TextView
+        android:id="@+id/tv_revenue_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:fontFamily="sans-serif"
+        android:gravity="start"
+        android:text="@string/Revenue"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_header"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_top_rated" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_revenue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_size_medium"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_revenue_header" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

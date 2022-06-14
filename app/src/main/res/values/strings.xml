@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Movie Catalog</string>
+
+    //tool bar
+    <string name="catalog">CATALOG</string>
+    <string name="details">DETAILS</string>
+
+    //Movie catalog screen
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="Revenue">Revenue</string>
+
 </resources>
