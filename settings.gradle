@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Movie Catalog"
 include ':app'
+include ':common'
+include ':network'
+include ':repository'
+include ':use_case'
