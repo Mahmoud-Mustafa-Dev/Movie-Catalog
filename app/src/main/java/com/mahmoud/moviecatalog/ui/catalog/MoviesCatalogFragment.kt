@@ -9,6 +9,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesCatalogViewModel>() {
 
+
+
     override val viewModel by viewModel<MoviesCatalogViewModel>()
 
     override fun getViewBinding(

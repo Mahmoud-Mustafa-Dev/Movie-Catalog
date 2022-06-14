@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_movie_cover"
         android:layout_width="@dimen/image_size_medium"
         android:layout_height="@dimen/image_size_medium"/>
 
