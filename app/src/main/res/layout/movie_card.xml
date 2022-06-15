@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_movie"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_0_5x"
+    android:elevation="@dimen/base_elevation"
+    app:cardCornerRadius="10dp">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_movie_cover"
         android:layout_width="@dimen/image_size_medium"
-        android:layout_height="@dimen/image_size_medium"/>
+        android:layout_height="@dimen/image_size_medium"
+        android:scaleType="centerCrop" />
 
 </androidx.cardview.widget.CardView>
