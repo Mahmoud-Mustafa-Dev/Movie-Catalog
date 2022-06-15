@@ -4,6 +4,7 @@
 
 
     <dimen name="margin_0_5x">8dp</dimen>
+    <dimen name="margin_1_0x">16dp</dimen>
     <dimen name="content_vertical_margin">60dp</dimen>
 
     <dimen name="base_elevation">5dp</dimen>
@@ -15,4 +16,5 @@
     <dimen name="text_size_medium">15sp</dimen>
 
     <dimen name="image_size_medium">170dp</dimen>
+    <dimen name="image_size_large">200dp</dimen>
 </resources>
