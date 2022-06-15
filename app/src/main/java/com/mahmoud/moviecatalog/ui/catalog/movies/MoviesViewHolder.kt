@@ -17,7 +17,12 @@ class MoviesViewHolder(private val binding: MovieCardBinding, private val listen
     @SuppressLint("SetTextI18n")
     fun bind(movie: Movie) {
 
-        binding.ivMovieCover.loadImage(imageUrl = RetrofitConstants.IMAGE_BASE_URL + movie.poster_path)
+        if(movie.poster_path != null) {
+            binding.ivMovieCover.loadImage(imageUrl = RetrofitConstants.IMAGE_BASE_URL + movie.poster_path)
+        } else {
+            binding.ivMovieCover.setBackgroundResource(R.drawable.default_movie_image)
+        }
+
         binding.cvMovie.animation =
             AnimationUtils.loadAnimation(this.itemView.context, R.anim.item_translate_scale)
 

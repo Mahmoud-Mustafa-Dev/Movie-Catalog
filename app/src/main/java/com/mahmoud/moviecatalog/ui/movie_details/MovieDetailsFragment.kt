@@ -28,7 +28,11 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private fun populateMovieInformation(movie: Movie) {
         val rating = getString(R.string.rating) + " " + movie.vote_average.toString()
-        binding.ivMovieCover.loadImage(RetrofitConstants.IMAGE_BASE_URL + movie.poster_path)
+        if(movie.poster_path != null) {
+            binding.ivMovieCover.loadImage(RetrofitConstants.IMAGE_BASE_URL + movie.poster_path)
+        } else {
+            binding.ivMovieCover.setBackgroundResource(R.drawable.default_movie_image)
+        }
         binding.tvMovieTitle.text = movie.original_title
         binding.tvMovieOverview.text = movie.overview
         binding.tvMovieRating.text = rating
