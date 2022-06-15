@@ -2,21 +2,33 @@ package com.mahmoud.moviecatalog.ui.catalog.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.mahmoud.common.entities.Movie
 import com.mahmoud.moviecatalog.R
 import com.mahmoud.moviecatalog.databinding.MovieCardBinding
 import com.mahmoud.common.listeners.MovieCardListener
 
 class MoviesAdapter(
-    private val listener: MovieCardListener,
+    private val listener: MovieCardListener
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    PagingDataAdapter<Movie, MoviesViewHolder>(MOVIES_RESULT_COMPARATOR),
     MovieCardListener {
 
-    private var data = listOf<Movie>()
+    companion object {
+        private val MOVIES_RESULT_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val binding =
             MovieCardBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -26,22 +38,14 @@ class MoviesAdapter(
         return MoviesViewHolder(binding, this)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder !is MoviesViewHolder) return
-        val currentNft = data[position]
-        holder.bind(currentNft)
+    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
+        getItem(position)?.let { result ->
+            holder.bind(result)
+        }
     }
-
-    override fun getItemCount() = data.size
-
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.movie_card
-    }
-
-    fun setMoviesList(moviesList: List<Movie>) {
-        data = moviesList
-        notifyDataSetChanged()
     }
 
     override fun onMovieClicked() {

@@ -16,9 +16,6 @@ class MoviesViewHolder(private val binding: MovieCardBinding, private val listen
 
         //todo set the movie cover
 
-        binding.ivMovieCover.animation =
-            AnimationUtils.loadAnimation(this.itemView.context, R.anim.item_translate_scale)
-
         binding.ivMovieCover.setOnClickListener {
             listener.onMovieClicked()
         }

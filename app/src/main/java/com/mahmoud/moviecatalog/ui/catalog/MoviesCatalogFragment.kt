@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
+import androidx.paging.PagingData
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.common.entities.Movie
 import com.mahmoud.common.entities.Result
 import com.mahmoud.common.entities.handleWith
@@ -20,7 +24,7 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
 
     private lateinit var movieCardListener: MovieCardListener
 
-    private val moviesAdapter: MoviesAdapter = MoviesAdapter(this)
+    private val popularMoviesAdapter = MoviesAdapter(this)
 
     override val viewModel by viewModel<MoviesCatalogViewModel>()
 
@@ -34,18 +38,33 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupPopularMoviesRV()
         observe(viewModel.moviesList, ::observePopularMovies)
     }
 
-    private fun observePopularMovies(result: Result<List<Movie>>) {
+    private fun setupPopularMoviesRV() {
+        binding.rvPopular.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = popularMoviesAdapter
+            val dividerItemDecoration = DividerItemDecoration(
+                this.context,
+                (layoutManager as LinearLayoutManager).orientation
+            )
+            addItemDecoration(dividerItemDecoration)
+            doOnPreDraw {
+                parentFragment?.startPostponedEnterTransition()
+            }
+        }
+    }
+
+    private fun observePopularMovies(result: Result<PagingData<Movie>>) {
         result.handleWith(
             activity = requireActivity(),
             success = { movies ->
-                //movies recieved
+                popularMoviesAdapter.submitData(lifecycle, movies)
             },
             error = {
-                //there was an error
-
+                // todo handle errors
             }
         )
     }

@@ -1,6 +1,4 @@
 package com.mahmoud.common.entities
 
-//todo add all the movie attributes
-data class Movie(
-    val title: String
-)
+data class Movie(var original_title: String, var poster_path: String, var overview: String)
+

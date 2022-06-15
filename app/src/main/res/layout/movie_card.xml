@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:elevation="@dimen/base_elevation">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_movie_cover"
         android:layout_width="@dimen/image_size_medium"
-        android:layout_height="@dimen/image_size_medium"/>
+        android:layout_height="@dimen/image_size_medium" />
 
 </androidx.cardview.widget.CardView>

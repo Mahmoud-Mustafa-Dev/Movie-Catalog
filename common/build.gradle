@@ -51,4 +51,8 @@ dependencies {
     //retrofit
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //paging
+    api "androidx.paging:paging-common-ktx:$paging_version"
+    api "androidx.paging:paging-runtime-ktx:$paging_version"
 }
