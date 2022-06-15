@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenStarted
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.common.entities.Movie
 import com.mahmoud.common.entities.Result
 import com.mahmoud.common.entities.handleWith
-import com.mahmoud.common.extensions.observe
+import com.mahmoud.common.extensions.*
 import com.mahmoud.common.listeners.MovieCardListener
 import com.mahmoud.moviecatalog.databinding.MoviesCatalogFragmentBinding
 import com.mahmoud.moviecatalog.ui.base.BaseFragment
 import com.mahmoud.moviecatalog.ui.catalog.movies.MoviesAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesCatalogViewModel>(),
@@ -40,6 +44,7 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
 
         setupPopularMoviesRV()
         observe(viewModel.moviesList, ::observePopularMovies)
+        observeAdapterState()
     }
 
     private fun setupPopularMoviesRV() {
@@ -69,15 +74,35 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
         )
     }
 
-    private fun setUpMoviesList() {
-        //todo pass the list of movies to the adapter
+    private fun observeAdapterState() {
+        lifecycleScope.launch {
+            lifecycle.whenStarted {
+                popularMoviesAdapter.loadStateFlow.collectLatest { loadStates ->
+                    when {
+                        loadStates.isInitializing()
+                                || loadStates.isLoadingRefresh() -> {
+                            binding.popularMoviesShimmerViewContainer.show()
+                            binding.rvPopular.hide()
+                        }
+                        loadStates.isDataLoaded()
+                                || loadStates.isNoMoreData(popularMoviesAdapter.itemCount) -> {
+                            binding.popularMoviesShimmerViewContainer.hide()
+                            binding.rvPopular.show()
+
+                        }
+                        loadStates.isEmptyState(popularMoviesAdapter.itemCount) -> {
+                            //todo handle empty state
+                        }
+                        loadStates.isError() -> {
+                            //todo handle error state
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onMovieClicked() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onMoviesLoaded() {
         TODO("Not yet implemented")
     }
 }

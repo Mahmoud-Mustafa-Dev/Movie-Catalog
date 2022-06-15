@@ -51,8 +51,4 @@ class MoviesAdapter(
     override fun onMovieClicked() {
         TODO("Not yet implemented")
     }
-
-    override fun onMoviesLoaded() {
-        TODO("Not yet implemented")
-    }
 }

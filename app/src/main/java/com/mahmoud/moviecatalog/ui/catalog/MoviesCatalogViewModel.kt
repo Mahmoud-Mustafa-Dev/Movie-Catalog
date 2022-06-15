@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import com.mahmoud.common.entities.Movie
+import com.mahmoud.common.entities.MoviesFeed
 import com.mahmoud.common.entities.Result
 import com.mahmoud.moviecatalog.ui.base.BaseViewModel
 import com.mahmoud.use_case.catalog.CatalogUseCase
@@ -23,8 +24,9 @@ class MoviesCatalogViewModel(
     }
 
     private fun observeMovies() {
+        val moviesFeed = MoviesFeed.PopularMoviesFeed
         launchCoroutine {
-            catalogUseCase.getPopularMovies()
+            catalogUseCase.getPopularMovies(moviesFeed)
                 .catch { error ->
                     moviesList.postValue(Result.Error(error))
                 }
