@@ -1,4 +1,4 @@
-package com.mahmoud.common.extensions
+package com.mahmoud.moviecatalog.extensions
 
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState

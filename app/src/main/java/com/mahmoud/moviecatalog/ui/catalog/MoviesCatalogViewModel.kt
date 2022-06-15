@@ -2,7 +2,9 @@ package com.mahmoud.moviecatalog.ui.catalog
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.mahmoud.common.entities.Movie
 import com.mahmoud.common.entities.MoviesType
 import com.mahmoud.common.entities.Result
@@ -30,6 +32,7 @@ class MoviesCatalogViewModel(
     private fun observeMovies(moviesType: MoviesType) {
         launchCoroutine {
             catalogUseCase.getMovies(moviesType)
+                .cachedIn(viewModelScope)
                 .catch { error ->
                     when(moviesType) {
                         is MoviesType.PopularMoviesType -> popularMoviesList.postValue(Result.Error(error))

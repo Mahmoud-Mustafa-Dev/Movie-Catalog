@@ -6,8 +6,10 @@
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/drawable/divider.xml" value="0.1485" />
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/activity_main.xml" value="0.21574074074074073" />
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/app_bar.xml" value="0.4203883495145631" />
+        <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/fragment_movie_details.xml" value="0.30052083333333335" />
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/fragment_movies_catalog.xml" value="0.41333333333333333" />
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/movie_card.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/movie_details_fragment.xml" value="0.4197916666666667" />
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/movies_catalog_fragment.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/movies_shimmer.xml" value="0.44540727902946275" />
         <entry key="..\:/AndroidProjects/MovieCatalog/app/src/main/res/layout/toolbar.xml" value="0.33" />

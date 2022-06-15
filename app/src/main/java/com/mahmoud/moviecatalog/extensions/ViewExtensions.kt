@@ -1,4 +1,4 @@
-package com.mahmoud.common.extensions
+package com.mahmoud.moviecatalog.extensions
 
 import android.view.View
 
