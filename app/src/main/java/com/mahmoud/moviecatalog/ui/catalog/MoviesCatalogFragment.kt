@@ -51,7 +51,10 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
         observe(viewModel.popularMoviesList, ::observePopularMovies)
         observe(viewModel.topRatedMoviesList, ::observeTopRatedMovies)
         observe(viewModel.revenueMoviesList, ::observeRevenueMovies)
-        observeAdapterState()
+
+        observeAdapterState(popularMoviesAdapter, MovieFilters.POPULAR)
+        observeAdapterState(topRatedMoviesAdapter, MovieFilters.TOP_RATED)
+        observeAdapterState(revenueMoviesAdapter, MovieFilters.REVENUE)
     }
 
     private fun setUpRecyclerViews() {
@@ -62,8 +65,9 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
 
     private fun setupRecyclerViews(rv: RecyclerView, filter: MovieFilters) {
         rv.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = when(filter) {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = when (filter) {
                 MovieFilters.POPULAR -> popularMoviesAdapter
                 MovieFilters.TOP_RATED -> topRatedMoviesAdapter
                 MovieFilters.REVENUE -> revenueMoviesAdapter
@@ -116,20 +120,45 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
         )
     }
 
-    private fun observeAdapterState() {
+
+    private fun observeAdapterState(moviesAdapter: MoviesAdapter, filter: MovieFilters) {
         lifecycleScope.launch {
             lifecycle.whenStarted {
-                popularMoviesAdapter.loadStateFlow.collectLatest { loadStates ->
+                moviesAdapter.loadStateFlow.collectLatest { loadStates ->
                     when {
                         loadStates.isInitializing()
                                 || loadStates.isLoadingRefresh() -> {
-                            binding.popularMoviesShimmerViewContainer.show()
-                            binding.rvPopular.hide()
+                            when (filter) {
+                                MovieFilters.POPULAR -> {
+                                    binding.shmrPopular.moviesShimmerViewContainer.show()
+                                    binding.rvPopular.hide()
+                                }
+                                MovieFilters.TOP_RATED -> {
+                                    binding.shmrTopRated.moviesShimmerViewContainer.show()
+                                    binding.rvTopRated.hide()
+                                }
+                                MovieFilters.REVENUE -> {
+                                    binding.shmrRevenue.moviesShimmerViewContainer.show()
+                                    binding.rvRevenue.hide()
+                                }
+                            }
                         }
                         loadStates.isDataLoaded()
                                 || loadStates.isNoMoreData(popularMoviesAdapter.itemCount) -> {
-                            binding.popularMoviesShimmerViewContainer.hide()
-                            binding.rvPopular.show()
+                            when (filter) {
+                                MovieFilters.POPULAR -> {
+                                    binding.shmrPopular.moviesShimmerViewContainer.hide()
+                                    binding.rvPopular.show()
+                                }
+                                MovieFilters.TOP_RATED -> {
+                                    binding.shmrTopRated.moviesShimmerViewContainer.hide()
+                                    binding.rvTopRated.show()
+                                }
+                                MovieFilters.REVENUE -> {
+                                    binding.shmrRevenue.moviesShimmerViewContainer.hide()
+                                    binding.rvRevenue.show()
+                                }
+                            }
 
                         }
                         loadStates.isEmptyState(popularMoviesAdapter.itemCount) -> {

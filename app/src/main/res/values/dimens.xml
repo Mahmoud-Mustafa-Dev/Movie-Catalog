@@ -14,5 +14,5 @@
     <dimen name="text_size_header">25sp</dimen>
     <dimen name="text_size_medium">15sp</dimen>
 
-    <dimen name="image_size_medium">150dp</dimen>
+    <dimen name="image_size_medium">170dp</dimen>
 </resources>
