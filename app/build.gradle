@@ -38,6 +38,9 @@ android {
 dependencies {
 
     implementation project(':common')
+    implementation project(':use_case')
+    implementation project(':repository')
+    implementation project(':network')
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -62,4 +65,7 @@ dependencies {
 
     // Recycler view
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+
+    // Shimmer
+    implementation "com.facebook.shimmer:shimmer:$shimmerVersion"
 }
