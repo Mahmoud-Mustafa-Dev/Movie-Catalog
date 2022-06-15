@@ -53,9 +53,4 @@ class MoviesAdapter(
     override fun onMovieClicked(movie: Movie) {
         listener.onMovieClicked(movie)
     }
-
-    override fun onViewRecycled(holder: MoviesViewHolder) {
-        super.onViewRecycled(holder)
-        binding.ivMovieCover.setImageBitmap(null)
-    }
 }
