@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.common.entities.Movie
-import com.mahmoud.moviecatalog.R
+import com.mahmoud.common.extensions.loadImage
 import com.mahmoud.moviecatalog.databinding.MovieCardBinding
 import com.mahmoud.common.listeners.MovieCardListener
+import com.mahmoud.moviecatalog.R
+
+import com.mahmoud.network.catalog.retrofit.RetrofitConstants
 
 class MoviesViewHolder(private val binding: MovieCardBinding, private val listener: MovieCardListener) :
     RecyclerView.ViewHolder(binding.root) {
@@ -14,14 +17,13 @@ class MoviesViewHolder(private val binding: MovieCardBinding, private val listen
     @SuppressLint("SetTextI18n")
     fun bind(movie: Movie) {
 
-        //todo set the movie cover
+        binding.ivMovieCover.loadImage(imageUrl = RetrofitConstants.IMAGE_BASE_URL + movie.poster_path)
+        binding.cvMovie.animation =
+            AnimationUtils.loadAnimation(this.itemView.context, R.anim.item_translate_scale)
+
 
         binding.ivMovieCover.setOnClickListener {
             listener.onMovieClicked()
         }
-    }
-
-    private fun setMovieImage(url: String) {
-        //todo set movie cover
     }
 }
