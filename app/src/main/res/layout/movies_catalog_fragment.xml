@@ -38,53 +38,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_popular_header" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/popular_movies_shimmer_view_container"
+    <include
+        android:id="@+id/shmr_popular"
+        layout="@layout/movies_shimmer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_popular_header">
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="@dimen/margin_0_5x"
-            android:layout_marginTop="@dimen/margin_0_5x"
-            shimmer:duration="800">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_size_medium"
-                android:columnCount="4">
-
-                <include
-                    layout="@layout/movie_card"
-                    android:layout_width="@dimen/image_size_medium"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_0_5x"
-                    android:layout_columnWeight="1" />
-
-                <include
-                    layout="@layout/movie_card"
-                    android:layout_width="@dimen/image_size_medium"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_0_5x"
-                    android:layout_columnWeight="1" />
-
-                <include
-                    layout="@layout/movie_card"
-                    android:layout_width="@dimen/image_size_medium"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_0_5x"
-                    android:layout_columnWeight="1" />
-
-            </LinearLayout>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toBottomOf="@id/tv_popular_header"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_columnWeight="1" />
 
     <TextView
         android:id="@+id/tv_top_rated_header"
@@ -112,6 +73,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_top_rated_header" />
 
+    <include
+        android:id="@+id/shmr_top_rated"
+        layout="@layout/movies_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_top_rated_header"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_columnWeight="1" />
+
     <TextView
         android:id="@+id/tv_revenue_header"
         android:layout_width="wrap_content"
@@ -137,6 +107,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_revenue_header" />
+
+    <include
+        android:id="@+id/shmr_revenue"
+        layout="@layout/movies_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_revenue_header"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_columnWeight="1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import com.mahmoud.common.entities.Movie
-import com.mahmoud.common.entities.MoviesFeed
+import com.mahmoud.common.entities.MoviesType
 import com.mahmoud.common.entities.Result
 import com.mahmoud.moviecatalog.ui.base.BaseViewModel
 import com.mahmoud.use_case.catalog.CatalogUseCase
@@ -17,21 +17,32 @@ class MoviesCatalogViewModel(
     coroutineDispatcher: CoroutineDispatcher
 ) : BaseViewModel(coroutineDispatcher) {
 
-    val moviesList: LiveData<Result<PagingData<Movie>>> = MutableLiveData()
+    val popularMoviesList: LiveData<Result<PagingData<Movie>>> = MutableLiveData()
+    val topRatedMoviesList: LiveData<Result<PagingData<Movie>>> = MutableLiveData()
+    val revenueMoviesList: LiveData<Result<PagingData<Movie>>> = MutableLiveData()
 
     override fun setup() {
-        observeMovies()
+        observeMovies(MoviesType.PopularMoviesType)
+        observeMovies(MoviesType.TopRatedMoviesType)
+        observeMovies(MoviesType.RevenueMoviesType)
     }
 
-    private fun observeMovies() {
-        val moviesFeed = MoviesFeed.PopularMoviesFeed
+    private fun observeMovies(moviesType: MoviesType) {
         launchCoroutine {
-            catalogUseCase.getPopularMovies(moviesFeed)
+            catalogUseCase.getMovies(moviesType)
                 .catch { error ->
-                    moviesList.postValue(Result.Error(error))
+                    when(moviesType) {
+                        is MoviesType.PopularMoviesType -> popularMoviesList.postValue(Result.Error(error))
+                        is MoviesType.TopRatedMoviesType -> topRatedMoviesList.postValue(Result.Error(error))
+                        is MoviesType.RevenueMoviesType -> revenueMoviesList.postValue(Result.Error(error))
+                    }
                 }
                 .collect { movies ->
-                    moviesList.postValue(Result.Success(movies))
+                    when(moviesType) {
+                        is MoviesType.PopularMoviesType -> popularMoviesList.postValue(Result.Success(movies))
+                        is MoviesType.TopRatedMoviesType ->  topRatedMoviesList.postValue(Result.Success(movies))
+                        is MoviesType.RevenueMoviesType -> revenueMoviesList.postValue(Result.Success(movies))
+                    }
                 }
         }
     }
