@@ -16,6 +16,7 @@ class MoviesAdapter(
     PagingDataAdapter<Movie, MoviesViewHolder>(MOVIES_RESULT_COMPARATOR),
     MovieCardListener {
 
+    lateinit var binding: MovieCardBinding
     companion object {
         private val MOVIES_RESULT_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
 
@@ -30,7 +31,7 @@ class MoviesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val binding =
+         binding =
             MovieCardBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -51,5 +52,10 @@ class MoviesAdapter(
 
     override fun onMovieClicked(movie: Movie) {
         listener.onMovieClicked(movie)
+    }
+
+    override fun onViewRecycled(holder: MoviesViewHolder) {
+        super.onViewRecycled(holder)
+        binding.ivMovieCover.setImageBitmap(null)
     }
 }
