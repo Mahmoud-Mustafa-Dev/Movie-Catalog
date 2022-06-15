@@ -11,7 +11,9 @@ import androidx.lifecycle.whenStarted
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.common.entities.Movie
+import com.mahmoud.common.entities.MovieFilters
 import com.mahmoud.common.entities.Result
 import com.mahmoud.common.entities.handleWith
 import com.mahmoud.common.extensions.*
@@ -29,6 +31,8 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
     private lateinit var movieCardListener: MovieCardListener
 
     private val popularMoviesAdapter = MoviesAdapter(this)
+    private val topRatedMoviesAdapter = MoviesAdapter(this)
+    private val revenueMoviesAdapter = MoviesAdapter(this)
 
     override val viewModel by viewModel<MoviesCatalogViewModel>()
 
@@ -42,15 +46,28 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupPopularMoviesRV()
+        setUpRecyclerViews()
+
         observe(viewModel.popularMoviesList, ::observePopularMovies)
+        observe(viewModel.topRatedMoviesList, ::observeTopRatedMovies)
+        observe(viewModel.revenueMoviesList, ::observeRevenueMovies)
         observeAdapterState()
     }
 
-    private fun setupPopularMoviesRV() {
-        binding.rvPopular.apply {
+    private fun setUpRecyclerViews() {
+        setupRecyclerViews(binding.rvPopular, MovieFilters.POPULAR)
+        setupRecyclerViews(binding.rvTopRated, MovieFilters.TOP_RATED)
+        setupRecyclerViews(binding.rvRevenue, MovieFilters.REVENUE)
+    }
+
+    private fun setupRecyclerViews(rv: RecyclerView, filter: MovieFilters) {
+        rv.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = popularMoviesAdapter
+            adapter = when(filter) {
+                MovieFilters.POPULAR -> popularMoviesAdapter
+                MovieFilters.TOP_RATED -> topRatedMoviesAdapter
+                MovieFilters.REVENUE -> revenueMoviesAdapter
+            }
             val dividerItemDecoration = DividerItemDecoration(
                 this.context,
                 (layoutManager as LinearLayoutManager).orientation
@@ -62,11 +79,36 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
         }
     }
 
+
     private fun observePopularMovies(result: Result<PagingData<Movie>>) {
         result.handleWith(
             activity = requireActivity(),
             success = { movies ->
                 popularMoviesAdapter.submitData(lifecycle, movies)
+            },
+            error = {
+                // todo handle errors
+            }
+        )
+    }
+
+    private fun observeTopRatedMovies(result: Result<PagingData<Movie>>) {
+        result.handleWith(
+            activity = requireActivity(),
+            success = { movies ->
+                topRatedMoviesAdapter.submitData(lifecycle, movies)
+            },
+            error = {
+                // todo handle errors
+            }
+        )
+    }
+
+    private fun observeRevenueMovies(result: Result<PagingData<Movie>>) {
+        result.handleWith(
+            activity = requireActivity(),
+            success = { movies ->
+                revenueMoviesAdapter.submitData(lifecycle, movies)
             },
             error = {
                 // todo handle errors

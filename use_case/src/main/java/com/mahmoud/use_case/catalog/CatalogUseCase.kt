@@ -10,6 +10,6 @@ class CatalogUseCase(
     private val repository: CatalogRepository
 ) {
       fun getMovies(moviesType: MoviesType): Flow<PagingData<Movie>> {
-        return repository.getPopularMovies(moviesType)
+        return repository.getMovies(moviesType)
     }
 }

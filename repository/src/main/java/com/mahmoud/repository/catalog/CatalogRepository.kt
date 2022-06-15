@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 class CatalogRepository(private val api: ICatalogApi) {
     //todo create the paging config prior
-    fun getPopularMovies(moviesType: MoviesType): Flow<PagingData<Movie>> {
+    fun getMovies(moviesType: MoviesType): Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(pageSize = moviesType.pagingConfig.pageSize),
             pagingSourceFactory = { CatalogPagingSource(api, moviesType) }).flow
