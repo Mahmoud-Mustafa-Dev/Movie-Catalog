@@ -9,8 +9,26 @@
         android:id="@+id/MoviesCatalogFragment"
         android:name="com.mahmoud.moviecatalog.ui.catalog.MoviesCatalogFragment"
         android:label="fragment_movies_catalog"
-        tools:layout="@layout/movies_catalog_fragment" >
+        tools:layout="@layout/fragment_movies_catalog" >
 
+        <action
+            android:id="@+id/action_MoviesCatalogFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in" >
+
+            <argument
+                android:name="movie"
+                app:argType="com.mahmoud.common.entities.Movie" />
+
+        </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.mahmoud.moviecatalog.ui.movie_details.MovieDetailsFragment"
+        android:label="MovieDetailsFragment" />
 
 </navigation>

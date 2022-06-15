@@ -16,19 +16,18 @@ import com.mahmoud.common.entities.Movie
 import com.mahmoud.common.entities.MovieFilters
 import com.mahmoud.common.entities.Result
 import com.mahmoud.common.entities.handleWith
-import com.mahmoud.common.extensions.*
+import com.mahmoud.moviecatalog.extensions.*
 import com.mahmoud.common.listeners.MovieCardListener
-import com.mahmoud.moviecatalog.databinding.MoviesCatalogFragmentBinding
+import com.mahmoud.moviecatalog.R
+import com.mahmoud.moviecatalog.databinding.FragmentMoviesCatalogBinding
 import com.mahmoud.moviecatalog.ui.base.BaseFragment
 import com.mahmoud.moviecatalog.ui.catalog.movies.MoviesAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesCatalogViewModel>(),
+class MoviesCatalogFragment : BaseFragment<FragmentMoviesCatalogBinding, MoviesCatalogViewModel>(),
     MovieCardListener {
-
-    private lateinit var movieCardListener: MovieCardListener
 
     private val popularMoviesAdapter = MoviesAdapter(this)
     private val topRatedMoviesAdapter = MoviesAdapter(this)
@@ -39,13 +38,14 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): MoviesCatalogFragmentBinding {
-        return MoviesCatalogFragmentBinding.inflate(inflater, container, false)
+    ): FragmentMoviesCatalogBinding {
+        return FragmentMoviesCatalogBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.bar.toolbar.title = getString(R.string.catalog)
         setUpRecyclerViews()
 
         observe(viewModel.popularMoviesList, ::observePopularMovies)
@@ -173,7 +173,9 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
         }
     }
 
-    override fun onMovieClicked() {
-        TODO("Not yet implemented")
+    override fun onMovieClicked(movie: Movie) {
+        navigate(
+            MoviesCatalogFragmentDirections.actionMoviesCatalogFragmentToMovieDetailsFragment(movie)
+        )
     }
 }

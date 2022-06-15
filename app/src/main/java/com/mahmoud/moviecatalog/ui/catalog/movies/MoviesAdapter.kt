@@ -2,6 +2,7 @@ package com.mahmoud.moviecatalog.ui.catalog.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.mahmoud.common.entities.Movie
@@ -48,7 +49,7 @@ class MoviesAdapter(
         return R.layout.movie_card
     }
 
-    override fun onMovieClicked() {
-        TODO("Not yet implemented")
+    override fun onMovieClicked(movie: Movie) {
+        listener.onMovieClicked(movie)
     }
 }

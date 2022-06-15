@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movie_details_nav"
+    app:startDestination="@id/movieDetailsFragment2">
+
+    <fragment
+        android:id="@+id/movieDetailsFragment2"
+        android:name="com.mahmoud.moviecatalog.ui.movie_details.MovieDetailsFragment"
+        android:label="MovieDetailsFragment" >
+
+        <argument
+            android:name="movie"
+            app:argType="com.mahmoud.common.entities.Movie" />
+
+    </fragment>
+</navigation>
