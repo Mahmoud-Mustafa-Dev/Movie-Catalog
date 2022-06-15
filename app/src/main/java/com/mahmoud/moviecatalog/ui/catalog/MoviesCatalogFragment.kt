@@ -43,7 +43,7 @@ class MoviesCatalogFragment : BaseFragment<MoviesCatalogFragmentBinding, MoviesC
         super.onViewCreated(view, savedInstanceState)
 
         setupPopularMoviesRV()
-        observe(viewModel.moviesList, ::observePopularMovies)
+        observe(viewModel.popularMoviesList, ::observePopularMovies)
         observeAdapterState()
     }
 
